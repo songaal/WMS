@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%-- <%@ page contentType="text/html; charset=UTF-8"%>
 <%@page import="java.util.*"%>
 <%@page import="com.websqrd.company.wms.*"%>
 <%@page import="com.websqrd.company.wms.dao.*"%>
@@ -203,3 +203,4 @@
 
 
 
+ --%>
