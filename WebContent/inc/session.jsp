@@ -9,6 +9,7 @@
 	String AUTH_ADMIN = "A"; //관리자
 
 	String PAGE_ROOT = "/WMS/";
+	String PAGE_MY = "/WMS/my/";
 	String PAGE_COMMON = "/WMS/common/";
 	String PAGE_SALES = "/WMS/sales/";
 	String PAGE_CLIENT = "/WMS/client/";
@@ -52,6 +53,7 @@
 	
 	if(myUserInfo != null){
 		//공통
+		allowedList.add(PAGE_MY);
 		allowedList.add(PAGE_COMMON);
 		allowedList.add(PAGE_CLIENT);
 		allowedList.add(PAGE_MESSAGE);
@@ -63,6 +65,7 @@
 		allowedList.add(PAGE_SALES);
 		allowedList.add(PAGE_TASK);
 		allowedList.add(PAGE_ATTACH);
+		
 		
 		if(myUserInfo.userType.contains(AUTH_USER)){
 			//일반사용자 user

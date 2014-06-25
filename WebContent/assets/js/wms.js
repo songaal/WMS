@@ -4,8 +4,8 @@ var alertTimer; //알림체크 타이머
 
 $(function() {
 	var checkInterval = 10 * 1000; 
-	setTimeout(checkAlert, 2 * 1000);//페이지 전환시는 2초후에 확인한다. 
-	alertTimer = setInterval(checkAlert, checkInterval);
+	//setTimeout(checkAlert, 2 * 1000);//페이지 전환시는 2초후에 확인한다. 
+	//alertTimer = setInterval(checkAlert, checkInterval);
 	
 	$(".wms_tooltip").tooltip();
 	$(".wms_popover").popover();

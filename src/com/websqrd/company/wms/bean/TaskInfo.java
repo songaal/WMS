@@ -15,8 +15,8 @@ public class TaskInfo extends DAOBean{
 	@DBField(column="user_sid")
 	public String userSid;
 	
-	@DBField(column="regdate", type=DBField.Type.Date, expression="NOW()", paramType=DBField.ParamType.nullparm)
-	public Date regdate;
+	@DBField(column="regdate", type=DBField.Type.Timestamp, expression="NOW()", paramType=DBField.ParamType.nullparm)
+	public Timestamp regdate;
 	
 	@DBField(column="taskdate", type=DBField.Type.Date)
 	public Date taskdate;	

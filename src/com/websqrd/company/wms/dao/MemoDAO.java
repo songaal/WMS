@@ -11,10 +11,6 @@ public class MemoDAO extends Mapper<MemoInfo> {
 		return new MemoInfo();
 	}
 	
-	public List<MemoInfo> select(String serialId){
-		return null;
-	}
-	
 	public MemoInfo selectOne(String serialId){
 		String where = "where user_sid = '" + serialId + "'";
 		List<MemoInfo> list = super.select(where, null);

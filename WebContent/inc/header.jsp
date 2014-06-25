@@ -19,7 +19,6 @@
 <link href="/WMS/assets/css/wms.css" rel="stylesheet">
 <link href="/WMS/assets/css/datepicker.css" rel="stylesheet">
 <link href="/WMS/assets/fullcalendar/fullcalendar.css" rel="stylesheet">
-
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -43,7 +42,10 @@
 <script src="/WMS/assets/js/bootstrap-datepicker.js"></script>
 <script src="/WMS/assets/js/bootbox.js"></script>
 <script src="/WMS/assets/js/wms.js"></script>
-<script src="/WMS/assets/ckeditor2/ckeditor.js"></script>
+<!-- <script src="http://cdn.ckeditor.com/4.4.1/full/ckeditor.js"></script> -->
+<script src="/WMS/assets/ckeditor4/ckeditor.js"></script>
+
+
 <%
 	//out.println(myUrl);
 	if(myUrlPath.equals(PAGE_ROOT)){
@@ -91,6 +93,7 @@ String url = (request.getRequestURL()).toString();
 				<a class="brand " href="/WMS/">WMS</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
+						<li class="<%=(url.indexOf(PAGE_MY)>0) ? "active":"" %>"><a href="<%=PAGE_MY%>">MY</a></li>
 						<% if(allowedList.contains(PAGE_SALES)){ %>
 						<li class="<%=(url.indexOf(PAGE_SALES)>0) ? "active":"" %>"><a href="<%=PAGE_SALES%>">영업</a></li>
 						<% } %>
