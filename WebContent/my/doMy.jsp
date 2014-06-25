@@ -15,11 +15,6 @@
 	String action = request.getParameter("action");
 	String content = request.getParameter("content");
 	String taskdate = request.getParameter("taskdate");
-	out.println(action);
-	out.println("<hr>");
-	out.println(taskdate);
-	out.println("<hr>");
-	out.println(content);
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
 	if("newEvent".equalsIgnoreCase(action)){
@@ -48,7 +43,7 @@
 				taskInfoDAO.create(taskInfo);
 			}
 		} catch (Exception e) {
-			out.println(e);
+			System.out.println(e);
 		}
 		
 	} else if("updateMemo".equalsIgnoreCase(action)){
@@ -81,6 +76,6 @@
 	}
 	
 	response.sendRedirect("/WMS/my/index.jsp?date="+taskdate);
-
+	
 %>
 

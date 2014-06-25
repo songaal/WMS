@@ -53,7 +53,18 @@ $(document).ready(function(){
 			    $("#taskUpdateForm").submit();
 		    }
 		});
+		
+		
 	}, 500);
+	
+	setInterval(function(){
+		var isMemoDirty = CKEDITOR.instances.myMemo.checkDirty();
+		var isWorkDirty = CKEDITOR.instances.todayWork.checkDirty();
+		console.log("memo dirty : ", isMemoDirty, ", work dirty : ", isWorkDirty);
+		CKEDITOR.instances.myMemo.resetDirty();
+		CKEDITOR.instances.todayWork.resetDirty();
+	}, 1000);
+	
 	
 	$.fn.datepicker7.dates['ko'] = {
 	    days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
