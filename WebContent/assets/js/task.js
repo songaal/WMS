@@ -1,7 +1,16 @@
 $(function() {
-
+	
 	$('document').ready(function() {
 		callInterval();
+		
+		userSelect = $("#userSelect");
+		if (userSelect) {
+			prepareSelectUser(userSelect, false);
+		}
+
+		if (selectUser != "") {
+			setSelectValue(userSelect, selectUser);
+		}
 	});
 
 	$('#liveDatePicker').datepicker().on('changeDate', function(ev) {
@@ -68,45 +77,45 @@ $(function() {
 		});
 	}
 
-	$("div.fc-day-content").dblclick(function() {
-		if ($(this).attr("contenteditable") == "true")
-			return false;
-
-		dblClick($(this));
-		return false;
-	});
-
-	$("div.fc-day-issue").dblclick(function() {
-		if ($(this).attr("contenteditable") == "true")
-			return false;
-		dblClick($(this));
-		return false;
-	});
-
-	$("div.fc-day-content").keypress(function(event) {
-		if ((event.shiftKey || event.altKey || event.ctrlKey) && event.which == 13) {
-			if (event.which == 13) {
-				$("div.fc-day-content").blur()
-				return;
-			}
-		}
-	});
-
-	$("div.fc-day-issue").keypress(function(event) {
-		console.log('keypress');
-		if ((event.shiftKey || event.altKey || event.ctrlKey) && event.which == 13) {
-			$("div.fc-day-issue").blur();
-			return;
-		}		
-	});
-
-	$("div.fc-day-content").blur(function() {
-		onBlur($(this));
-	});
-
-	$("div.fc-day-issue").blur(function() {
-		onBlur($(this));
-	});
+//	$("div.fc-day-content").dblclick(function() {
+//		if ($(this).attr("contenteditable") == "true")
+//			return false;
+//
+//		dblClick($(this));
+//		return false;
+//	});
+//
+//	$("div.fc-day-issue").dblclick(function() {
+//		if ($(this).attr("contenteditable") == "true")
+//			return false;
+//		dblClick($(this));
+//		return false;
+//	});
+//
+//	$("div.fc-day-content").keypress(function(event) {
+//		if ((event.shiftKey || event.altKey || event.ctrlKey) && event.which == 13) {
+//			if (event.which == 13) {
+//				$("div.fc-day-content").blur()
+//				return;
+//			}
+//		}
+//	});
+//
+//	$("div.fc-day-issue").keypress(function(event) {
+//		console.log('keypress');
+//		if ((event.shiftKey || event.altKey || event.ctrlKey) && event.which == 13) {
+//			$("div.fc-day-issue").blur();
+//			return;
+//		}		
+//	});
+//
+//	$("div.fc-day-content").blur(function() {
+//		onBlur($(this));
+//	});
+//
+//	$("div.fc-day-issue").blur(function() {
+//		onBlur($(this));
+//	});
 
 	function onBlur(divElem) {
 		editMode = false;
@@ -134,14 +143,7 @@ $(function() {
 				.find("#issue"), form.find("#UserId"), form.find("#tid"));
 	}
 
-	userSelect = $("#userSelect");
-	if (userSelect) {
-		prepareSelectUser(userSelect, false);
-	}
-
-	if (selectUser != "") {
-		setSelectValue(userSelect, selectUser);
-	}
+	
 });
 
 // /////////////////////////////////////////////////

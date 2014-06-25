@@ -59,7 +59,7 @@
 		<!-- 메인내용 -->
 		<div >
 
-			<form action="index.jsp" id="liveDateForm" method="post" class="hide">
+			<form action="index.jsp" id="liveDateForm" method="get" class="hide">
 				<input type="hidden" id="year" name="year" value="<%=year%>"> 
 				<input type="hidden" id="month" name="month" value="<%=month%>">
 				<input type="hidden" id="user" name="user" value="<%=user%>">
@@ -123,8 +123,8 @@
 								SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 								String strTaskDate = sdf.format(cal.getTime());
 								String strRegDate = tInfo != null ? sdf.format(tInfo.regdate) : "" ;
-								String strContent = tInfo != null ? strContent = tInfo.content.replaceAll("(\r\n|\n)", "<br />") : " ";
-								String strIssue = tInfo != null ? tInfo.issue.replaceAll("(\r\n|\n)", "<br />") : " ";
+								String strContent = (tInfo != null && tInfo.content != null) ? strContent = tInfo.content : "";//.replaceAll("(\r\n|\n)", "<br />") : " ";
+								String strIssue = (tInfo != null && tInfo.issue != null) ? tInfo.issue : ""; //.replaceAll("(\r\n|\n)", "<br />") : " ";
 							%>
 							<div class="fc-day" id="taskdiv<%=idx%>">
 								<form id="taskModify<%=idx%>" method="post" action="doTask.jsp">
@@ -135,8 +135,8 @@
 									<input type="hidden" id="regdate" value="<%=strRegDate%>">
 									<input type="hidden" id="day" value="<%=idx%>" /> 
 									<input type="hidden" id="UserId" value="<%=user%>" /> 
-									<input type="hidden" id="content" value="<%=strContent%>" /> 
-									<input type="hidden" id="issue" value="<%=strIssue%>" />
+									<%-- <input type="hidden" id="content" value="<%=strContent%>" /> 
+									<input type="hidden" id="issue" value="<%=strIssue%>" /> --%>
 									<div class="fc-day-content" id="content<%=idx%>" style="min-height: 60px; border: 1px solid #A9ABFE;">										
 											<%=strContent%>										
 									</div>
@@ -161,6 +161,8 @@
 <script>
 	$(document).ready(function() {
 		CKEDITOR.config.toolbar = [];
+		
+		
 	});	
 	selectUser = "<%=user%>";
 	writeAble = "true";

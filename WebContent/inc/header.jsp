@@ -18,6 +18,7 @@
 <link href="/WMS/assets/css/docs.css" rel="stylesheet">
 <link href="/WMS/assets/css/wms.css" rel="stylesheet">
 <link href="/WMS/assets/css/datepicker.css" rel="stylesheet">
+<link href="/WMS/assets/css/datepicker3.css" rel="stylesheet">
 <link href="/WMS/assets/fullcalendar/fullcalendar.css" rel="stylesheet">
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -40,6 +41,7 @@
 <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
 <script src="/WMS/assets/js/bootstrap.js"></script>
 <script src="/WMS/assets/js/bootstrap-datepicker.js"></script>
+<script src="/WMS/assets/js/bootstrap-datepicker-2.js"></script>
 <script src="/WMS/assets/js/bootbox.js"></script>
 <script src="/WMS/assets/js/wms.js"></script>
 <!-- <script src="http://cdn.ckeditor.com/4.4.1/full/ckeditor.js"></script> -->

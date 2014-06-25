@@ -20,6 +20,7 @@
 	out.println(taskdate);
 	out.println("<hr>");
 	out.println(content);
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
 	if("newEvent".equalsIgnoreCase(action)){
 		
@@ -32,7 +33,6 @@
 		eventDAO.create(eventInfo);
 		
 	} else if("updateTask".equalsIgnoreCase(action)){
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		TaskInfo taskInfo = new TaskInfo();
 		
 		taskInfo.taskdate = new java.sql.Date(sdf.parse(taskdate).getTime());
@@ -65,7 +65,20 @@
 			memoDAO.create(memoInfo);
 		}
 		
-	} 
+	} else if ("checkOut".equalsIgnoreCase(action)) {
+		Date date = sdf.parse(taskdate);
+		LiveDAO liveDAO = new LiveDAO();
+		LiveInfo liveInfo = liveDAO.select(myUserInfo.serialId, date);
+		if(liveInfo != null){
+			long now = System.currentTimeMillis();
+			//로그인된 세션 myUserInfo 정보를 이용한다.
+			liveInfo.checkOut = new java.sql.Timestamp(now);
+			if(BusinessUtil.isWorkLate()){
+				liveInfo.status += LiveInfo.NIGHT_WORK;
+			}
+			liveDAO.modify(liveInfo);
+		}
+	}
 	
 	response.sendRedirect("/WMS/my/index.jsp?date="+taskdate);
 

@@ -17,15 +17,25 @@
 	}
 	
 	Date todayDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+	boolean isToay = WebUtil.isToday(todayDate);
+	
 	String userId = myUserInfo.serialId;	
 	
-	Calendar cal = Calendar.getInstance();
-	int year = 0;
-	int month = 0;
-
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm");
+	SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
+	
+	LiveDAO liveDAO = new LiveDAO();
+	LiveInfo liveInfo = liveDAO.select(userId, todayDate);
+	
 	
 %>
+<style>
+.workTime { font-size : 18px; font-weight: bold; }
+
+
+</style>
 <script>
+
 $(document).ready(function(){
 	CKEDITOR.inlineAll();
 	setTimeout(function(){
@@ -45,54 +55,123 @@ $(document).ready(function(){
 		});
 	}, 500);
 	
-  });
+	$.fn.datepicker7.dates['ko'] = {
+	    days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+	    daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+	    daysMin: ["일", "월", "화", "수", "목", "금", "토", "일"],
+	    months: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+	    monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+	    today: "오늘",
+	    clear: "지우기"
+	};
+	datepicker7 = $("#myCalendar").datepicker7({
+		todayHighlight: true,
+		language: "ko",
+		todayBtn: "linked",
+		format: "yyyy-mm-dd"
+	});
+	
+	datepicker7.on('changeDate', function(ev) {
+	    if(ev.date) {
+	    	goDate(ev.date);
+	    }
+	  });
+});
 
+function goDate(date) {
+	var curr_date = date.getDate();
+	var curr_month = date.getMonth() + 1;
+	var curr_year = date.getFullYear();
+	$("#moveDateForm input[name=date]").val(curr_year + "-" + curr_month + "-" + curr_date);
+	$("#moveDateForm").submit();
+}
 
+function doCheckOut() {
+	$("#checkOutForm").submit();
+}
 	
 </script>
-<div class="container">
+<div class="container"> 
 	<div class="row">
-		<div >
-			<h2 id="body-copy"><%=myUserInfo.userName %> Home </h2>
-		</div>
-
 		<!-- 메인내용 -->
-		<div >
-			<div id="myCalendar"></div>
 			<div class="row">
-				<div class="span12">
-				<h3 style="color: #0088cc;">
-				<%
-				Calendar today = Calendar.getInstance();
-				SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd");
-				int dayOfWeek = today.get(Calendar.DAY_OF_WEEK);
-				String dayString = null;
-				if(dayOfWeek == Calendar.MONDAY){
-					dayString = "월";
-				}else if(dayOfWeek == Calendar.TUESDAY){
-					dayString = "화";
-				}else if(dayOfWeek == Calendar.WEDNESDAY){
-					dayString = "수";
-				}else if(dayOfWeek == Calendar.THURSDAY){
-					dayString = "목";
-				}else if(dayOfWeek == Calendar.FRIDAY){
-					dayString = "금";
-				}else if(dayOfWeek == Calendar.SATURDAY){
-					dayString = "토";
-				}else if(dayOfWeek == Calendar.SUNDAY){
-					dayString = "일";
-				}
-				%>
-				<%=sdf1.format(today.getTime()) %> (<%=dayString %>)
-				</h3>
+				<div class="span4">
+					<div id="myCalendar" data-date="<%=date%>"></div>
+				</div>
+				<div class="span8">
+					<h3 style="color: #0088cc;">
+					<%
+					Calendar today = Calendar.getInstance();
+					today.setTime(todayDate);
+					SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd");
+					int dayOfWeek = today.get(Calendar.DAY_OF_WEEK);
+					String dayString = null;
+					if(dayOfWeek == Calendar.MONDAY){
+						dayString = "월";
+					}else if(dayOfWeek == Calendar.TUESDAY){
+						dayString = "화";
+					}else if(dayOfWeek == Calendar.WEDNESDAY){
+						dayString = "수";
+					}else if(dayOfWeek == Calendar.THURSDAY){
+						dayString = "목";
+					}else if(dayOfWeek == Calendar.FRIDAY){
+						dayString = "금";
+					}else if(dayOfWeek == Calendar.SATURDAY){
+						dayString = "토";
+					}else if(dayOfWeek == Calendar.SUNDAY){
+						dayString = "일";
+					}
+					%>
+					<%=myUserInfo.userName %> <%=sdf1.format(today.getTime()) %> (<%=dayString %>)
+					</h3>
+					
+					<%
+					String startTime = "";
+					String endTime = "";
+					try{
+						startTime = sdfTime.format(liveInfo.checkIn);
+					}catch(Exception e ){
+					}
+					try{
+						endTime = sdfTime.format(liveInfo.checkOut);
+					}catch(Exception e ){
+					}
+					
+					String statusStr = "";
+					String statusClass = "muted";
+					
+					if(liveInfo != null) {
+						if(liveInfo.status.contains(LiveInfo.LATE)){
+							statusStr = "(지각)";
+							statusClass = "text-error";
+						}else if(liveInfo.status.contains(LiveInfo.OK)){
+							statusClass = "text-success";
+						}
+						if(liveInfo.status.contains(LiveInfo.REST) || liveInfo.status.contains(LiveInfo.HALF_REST)){
+							statusStr = "(휴가)";
+							statusClass = "muted";
+						}
+					}
+					%>
+					<div class="workTime <%=statusClass%>">
+					근무 : <%=startTime %> ~ <%
+					if(endTime.length() > 0){
+						out.print(endTime); 
+					}else{
+						if(isToay) {
+							out.print("<input type='button' class='btn-small' onclick='javascript:doCheckOut();' value='퇴근'>");
+						}
+					}
+					%> <%=statusStr %>
+					<% 
+					
+					%>
+					</div>
 				</div>
 			</div>
-			
-			<%
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm");
-			%>
 			<div class="row">
-				<div class="span4" >
+				<div class="span4">
+					
 					
 					<%
 					ScheduleDAO scheduleDAO = new ScheduleDAO();
@@ -182,7 +261,11 @@ $(document).ready(function(){
 						<textarea name="content" style="width:95%; height:60px"></textarea>
 						<input type="submit" value="추가">
 					</form>
+					
 				</div>
+				
+				
+				
 				<%
 				SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
 				%>
@@ -211,15 +294,22 @@ $(document).ready(function(){
 					<i>Update time : <%=sdf3.format(memoInfo.regdate) %></i>
 					<div id="myMemo" contenteditable="true" class="my-box"><%=memoInfo.content %></div>
 				</div>
-				
-				
 			</div>
 			
 			
-		</div>
+			
 	</div>
 	<!-- row -->
 </div>
+<form id="moveDateForm" method="post" action="index.jsp">
+	<input type="hidden" name="date">
+</form>
+
+<form id="checkOutForm" method="post" action="doMy.jsp">
+	<input type="hidden" name="action" value="checkOut" >
+	<input type="hidden" name="taskdate" value="<%=date%>"> 
+</form>
+
 <form id="taskUpdateForm" method="post" action="doMy.jsp">
 	<input type="hidden" name="action" value="updateTask" >
 	<input type="hidden" name="taskdate" value="<%=date%>"> 
@@ -232,14 +322,6 @@ $(document).ready(function(){
 	<input type="hidden" name="content" >
 </form>
 <!-- container -->
-<script>
-	
-
-	selectUser = "<%=userId%>";
-	writeAble = "true";
-	year = "<%=year%>";
-	month = "<%=month%>";	
-</script>
 <%@include file="../inc/footer.jsp"%>
 
 
