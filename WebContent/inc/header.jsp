@@ -43,6 +43,7 @@
 <script src="/WMS/assets/js/bootstrap-datepicker.js"></script>
 <script src="/WMS/assets/js/bootstrap-datepicker-2.js"></script>
 <script src="/WMS/assets/js/bootbox.js"></script>
+<script src="/WMS/assets/js/notify.min.js"></script>
 <script src="/WMS/assets/js/wms.js"></script>
 <!-- <script src="http://cdn.ckeditor.com/4.4.1/full/ckeditor.js"></script> -->
 <script src="/WMS/assets/ckeditor4/ckeditor.js"></script>

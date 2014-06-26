@@ -1,3 +1,4 @@
+<%@page import="org.json.JSONWriter"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@page import="java.util.*"%>
 <%@page import="java.text.*"%>
@@ -27,39 +28,54 @@
 		EventDAO eventDAO = new EventDAO();
 		eventDAO.create(eventInfo);
 		
+		response.sendRedirect("/WMS/my/index.jsp?date="+taskdate);
+		
 	} else if("updateTask".equalsIgnoreCase(action)){
-		TaskInfo taskInfo = new TaskInfo();
-		
-		taskInfo.taskdate = new java.sql.Date(sdf.parse(taskdate).getTime());
-		taskInfo.userSid = myUserInfo.serialId;
-		taskInfo.regdate = new java.sql.Timestamp(System.currentTimeMillis());
-		taskInfo.content = content;
-		
-		TaskInfoDAO taskInfoDAO = new TaskInfoDAO();
-		try {
+		JSONWriter w = new JSONWriter(response.getWriter());
+		w.object();
+		try{
+			TaskInfo taskInfo = new TaskInfo();
+			
+			taskInfo.taskdate = new java.sql.Date(sdf.parse(taskdate).getTime());
+			taskInfo.userSid = myUserInfo.serialId;
+			taskInfo.regdate = new java.sql.Timestamp(System.currentTimeMillis());
+			taskInfo.content = content;
+			
+			TaskInfoDAO taskInfoDAO = new TaskInfoDAO();
 			String set = "set content = ?";
 			String where = "where user_sid='"+myUserInfo.serialId+"' and taskdate = '"+taskdate+"'";
 			if(taskInfoDAO.update(set, where, new String[]{content}) == 0) {
 				taskInfoDAO.create(taskInfo);
 			}
-		} catch (Exception e) {
-			System.out.println(e);
+			w.key("result").value(true);
+		}catch(Throwable e){
+			e.printStackTrace();
+			w.key("result").value(false);
 		}
+		w.endObject();
 		
 	} else if("updateMemo".equalsIgnoreCase(action)){
-		MemoInfo memoInfo = new MemoInfo();
-		memoInfo.map(paramMap);
-		memoInfo.userSID = myUserInfo.serialId;
-		memoInfo.regdate = new java.sql.Timestamp(System.currentTimeMillis());
-		
-		MemoDAO memoDAO = new MemoDAO();
+		JSONWriter w = new JSONWriter(response.getWriter());
+		w.object();
+		try{
+			MemoInfo memoInfo = new MemoInfo();
+			memoInfo.map(paramMap);
+			memoInfo.userSID = myUserInfo.serialId;
+			memoInfo.regdate = new java.sql.Timestamp(System.currentTimeMillis());
 			
-		if(memoDAO.update(memoInfo)){
-			//OK
-		}else{
-			memoDAO.create(memoInfo);
+			MemoDAO memoDAO = new MemoDAO();
+				
+			if(memoDAO.update(memoInfo)){
+				//OK
+			}else{
+				memoDAO.create(memoInfo);
+			}
+			w.key("result").value(true);
+		}catch(Throwable e){
+			e.printStackTrace();
+			w.key("result").value(false);
 		}
-		
+		w.endObject();
 	} else if ("checkOut".equalsIgnoreCase(action)) {
 		Date date = sdf.parse(taskdate);
 		LiveDAO liveDAO = new LiveDAO();
@@ -73,9 +89,11 @@
 			}
 			liveDAO.modify(liveInfo);
 		}
+		
+		response.sendRedirect("/WMS/my/index.jsp?date="+taskdate);
 	}
 	
-	response.sendRedirect("/WMS/my/index.jsp?date="+taskdate);
+	
 	
 %>
 
