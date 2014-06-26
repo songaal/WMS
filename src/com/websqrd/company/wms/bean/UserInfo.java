@@ -11,6 +11,7 @@ public class UserInfo extends DAOBean{
 	
 	public static String AUTH_USER = "U"; // 일반 사용자.
 	public static String AUTH_SALES = "S"; // 영업
+	public static String AUTH_MANAGER = "M"; // 총무
 	public static String AUTH_ADMIN = "A"; //사이트관리자
 	public static String AUTH_APPROVAL = "P"; //결제권.
 	

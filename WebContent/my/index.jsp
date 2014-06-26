@@ -576,17 +576,6 @@ function clock() {
 	<input type="hidden" name="taskdate" value="<%=date%>"> 
 </form>
 
-<form id="taskUpdateForm" method="post" action="doMy.jsp">
-	<input type="hidden" name="action" value="updateTask" >
-	<input type="hidden" name="taskdate" value="<%=date%>"> 
-	<input type="hidden" name="content" /> 
-</form>
-
-<form id="memoUpdateForm" method="post" action="doMy.jsp">
-	<input type="hidden" name="action" value="updateMemo" >
-	<input type="hidden" name="taskdate" value="<%=date%>"> 
-	<input type="hidden" name="content" >
-</form>
 <!-- container -->
 <%@include file="../inc/footer.jsp"%>
 

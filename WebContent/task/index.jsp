@@ -47,7 +47,11 @@
 	}
 	
 	if ( user == null || user.isEmpty() )
-		user = myUserInfo.serialId;		
+		user = myUserInfo.serialId;
+	
+	UserDAO userDAO = new UserDAO();
+	UserInfo userInfo = userDAO.select(user);
+	String targetUserType = userInfo.userType;
 %>
 
 <div class="container">
@@ -114,7 +118,23 @@
 						%>
 
 						<td>
-							<%	if ( idx > 0) {
+							<%
+							//총무업무권한은 같은 권한에서만 공개가능.
+							boolean isAllowed = true;
+							if(!user.equals(myUserInfo.serialId)) {
+								if(targetUserType.contains(UserInfo.AUTH_MANAGER)) {
+									if(!myUserInfo.userType.contains(UserInfo.AUTH_MANAGER)){
+										//보려는 사람은 총무업무, 나는 아닐경우.
+										isAllowed = false;
+									}
+								}
+							}
+							if(!isAllowed) {
+								%><div class="fc-day">
+									<div class="fc-day-content" style="min-height: 60px; border: 1px solid #A9ABFE;"></div>
+									<div class="fc-day-issue" style="min-height: 40px; border: 1px solid #E3E3FF; background-color : #F5F5DC"></div>	
+								</div><%
+							} else if ( idx > 0) {
 								cal.set(Calendar.YEAR, year);
 								cal.set(Calendar.MONTH, month-1);
 								cal.set(Calendar.DAY_OF_MONTH, idx);
@@ -146,7 +166,8 @@
 									</div>
 
 								</form>
-							</div> <% 	} %>
+							</div> 
+							<% 	} %>
 						</td>
 						<%}	%>
 					</tr>
