@@ -92,6 +92,7 @@
 				<th>이름</th>
 				<th>출근</th>
 				<th>퇴근</th>
+                    <th>아이피</th>
 				<th>상태</th>
 				<th>사유</th>
 				</tr>
@@ -104,12 +105,14 @@
 					String checkOut = "";
 					String status = "";
 					String memo = "";
+                    String ipAddress = "";
 					
 					if(info != null){
 						checkIn = WebUtil.toTimeString(info.checkIn);
 						checkOut = WebUtil.toTimeString(info.checkOut);
 						status = BusinessUtil.getLiveStatusString(info.status);
 						memo = WebUtil.getValue(info.memo);
+                        ipAddress = info.ipAddress;
 					}
 				%>
 				<tr>
@@ -117,6 +120,7 @@
 				<td><%=userInfo.userName %> <%=userInfo.title %></td>
 				<td><%=checkIn %></td>
 				<td><%=checkOut %></td>
+                    <td><%=ipAddress %></td>
 				<td><%=status %></td>
 				<td><%=memo %></td>
 				</tr>

@@ -15,6 +15,7 @@
 <body>
 <%
 	String action = request.getParameter("action");
+    String ipAddress = getClientIP(request);
 	
 	if("checkIn".equals(action) || "checkInOutter".equals(action) ){
 		boolean isOutter = "checkInOutter".equals(action); //외근여부.
@@ -49,6 +50,7 @@
 				//출근시간이 없다면 현시간으로 수정.
 				liveInfo.regTime = new Timestamp(now);
 				liveInfo.checkIn = liveInfo.regTime;
+                liveInfo.ipAddress = ipAddress;
 				isUpdate = true;
 			}else{
 				//출근시간이 있으면 스킵.
@@ -65,7 +67,8 @@
 			liveInfo.checkIn = liveInfo.regTime;
 			//liveInfo.checkOut
 			liveInfo.status = BusinessUtil.getCheckInStatusString(now);
-			
+            liveInfo.ipAddress = ipAddress;
+
 			if(isHolidayWork){
 				liveInfo.status = LiveInfo.SPECIAL_WORK;
 			}else if(liveInfo.status.contains(LiveInfo.LATE) && isYesterdayWorkLate){

@@ -147,6 +147,7 @@
 				<th>날짜</th>
 				<th>출근</th>
 				<th>퇴근</th>
+                    <th>아이피</th>
 				<th>근무상태</th>
 				<th>등록/수정시간</th>
 				<th>사유</th>
@@ -175,6 +176,7 @@
 							String regTime = "";
 							String memo = "";
 							String liveDateStr = "";
+                            String ipAddress = "";
 							if(info != null){
 								checkIn = WebUtil.toTimeString(info.checkIn);
 								checkOut = WebUtil.toTimeString(info.checkOut);
@@ -182,12 +184,14 @@
 								regTime = WebUtil.toShortDateTimeString(info.regTime);
 								memo = WebUtil.getValue(info.memo);
 								liveDateStr = WebUtil.toDateString(info.liveDate);
+                                ipAddress = info.ipAddress;
 							}
 				%>
 				<tr class="<%=classStr %>">
 				<td class="<%=classStr2 %>" ><%=i %> [<%=yoil %>]</td>
 				<td><%=checkIn %></td>
 				<td><%=checkOut %></td>
+                    <td><%=ipAddress %></td>
 				<td><%=status %><span class="live_date hide"><%=liveDateStr %></span></td>
 				<td><%=regTime %></td>
 				<td><%=memo %></td>

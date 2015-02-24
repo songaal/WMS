@@ -27,7 +27,9 @@ public class LiveInfo extends DAOBean{
 	public Timestamp checkIn; //출근시각	
 	@DBField(column="check_out", type=DBField.Type.Timestamp)
 	public Timestamp checkOut; //퇴근시각
-	@DBField(column="status")
+	@DBField(column="ipaddress")
+    public String ipAddress; //출근 아이피
+    @DBField(column="status")
 	public String status; //상태
 	@DBField(column="memo")
 	public String memo; //메모/사유

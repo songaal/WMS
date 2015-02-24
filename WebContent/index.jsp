@@ -49,7 +49,7 @@
 		
 		<!-- 사용자폼 -->
 		<div class="row-fluid">
-			<div class="span2">
+			<div class="span3">
 				<h4>내정보</h4>
 				<table class="table table-condensed table-striped">
 				<tr><th colspan="2"><%=myUserInfo.userName %> <%=myUserInfo.title %></th></tr>
@@ -60,9 +60,11 @@
 				String outTimeStr = "-";
 				String status = "";
 				String autoCheckIn = "<script>$(function() { doCheckInConfirm(); });</script>";
+                    String ipAddress = "";
 				if(liveInfo != null){
 					if(liveInfo.checkIn != null){
 						inTimeStr = WebUtil.toTimeString(liveInfo.checkIn);
+                        ipAddress = liveInfo.ipAddress;
 						//출근상태일때에 퇴근버튼을 보여준다.
 						if(liveInfo.checkOut != null){
 							outTimeStr = WebUtil.toTimeString(liveInfo.checkOut);
@@ -79,9 +81,10 @@
 					out.println(autoCheckIn);
 				}
 				%>
-				<tr><td>출근</td><td><%=inTimeStr %></td></tr>
+				<tr><td>출근</td><td><%=inTimeStr %>(<%=ipAddress %>)</td></tr>
 				<tr><td>퇴근</td><td><%=outTimeStr %></td></tr>
 				<tr><td>상태</td><td><%=status %></td></tr>
+                    <tr><td>IP</td><td><%=getClientIP(request)%></td></tr>
 				</table>
 			</div>
 			<div class="span4">
