@@ -1,24 +1,17 @@
 package com.websqrd.company.wms.dao;
 
-import java.lang.reflect.Field;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.websqrd.company.wms.DAOHandler;
 import com.websqrd.company.wms.annotation.DBField;
 import com.websqrd.company.wms.bean.DAOBean;
 import com.websqrd.company.wms.bean.DAOBeanInfo.FieldColumnType;
 import com.websqrd.tool.db.DBConnectionPool;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.lang.reflect.Field;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public abstract class Mapper<T extends DAOBean> {
@@ -84,17 +77,21 @@ public abstract class Mapper<T extends DAOBean> {
 				Object value = fct.field.get(entry);
 				
 				if(!DBField.ParamType.nullparm.equals(fct.paramType)) {
-					logger.debug("set pstmt {} {} >> {}", new Object[]{paramIdx, columnName, value});
+					logger.trace("set pstmt {} {} >> {}", new Object[]{paramIdx, columnName, value});
 					setPstmtValue(pstmt, paramIdx++, type, value);
 				}
 			}
 			if(pstmt.executeUpdate() > 0){
-				rs = pstmt.getGeneratedKeys();
-	            if (rs.next()) {
-	            	return rs.getString(1);
-	            } else{
-	            	return "";
-	            }
+				try{
+					rs = pstmt.getGeneratedKeys();
+		            if (rs.next()) {
+			            return rs.getString(1);
+		            }
+	            } catch(Throwable t1) {
+				}
+
+	            return "";
+
 			}else{
 				return null;
 			}
@@ -214,14 +211,14 @@ public abstract class Mapper<T extends DAOBean> {
 				Field field = fct.field;
 				Object value = field.get(entry);
 				if(fct.isPk){
-					logger.debug("set PK pstmt {} {} >> {}", new Object[]{pkParamIdx, columnName, value});
+					logger.trace("set PK pstmt {} {} >> {}", new Object[]{pkParamIdx, columnName, value});
 					setPstmtValue(pstmt, pkParamIdx++, type, value);
 				}else{
 					if(excludeColumns.contains(columnName)){
 						//제외필드는 업데이트 하지 않는다.
 						continue;
 					}
-					logger.debug("set pstmt {} {} >> {}", new Object[]{paramIdx, columnName, value});
+					logger.trace("set pstmt {} {} >> {}", new Object[]{paramIdx, columnName, value});
 					setPstmtValue(pstmt, paramIdx++, type, value);
 				}
 				
