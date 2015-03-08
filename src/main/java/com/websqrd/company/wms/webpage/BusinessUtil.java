@@ -1,37 +1,44 @@
 package com.websqrd.company.wms.webpage;
 
+import com.websqrd.company.wms.WMSConf;
+import com.websqrd.company.wms.bean.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Calendar;
 
-import com.websqrd.company.wms.bean.ApprovalInfo;
-import com.websqrd.company.wms.bean.LiveInfo;
-import com.websqrd.company.wms.bean.ProjectInfo;
-import com.websqrd.company.wms.bean.ProjectRequest;
-import com.websqrd.company.wms.bean.RestData;
-import com.websqrd.company.wms.bean.RestData2;
-import com.websqrd.company.wms.bean.RestInfo;
-
 public class BusinessUtil {
-	
-	public static final int CheckInTime = 9;
-	public static final int CheckInTimeCompromise = 10;
-	public static final int WorkLateTime = 22;
-	
+	protected static Logger logger = LoggerFactory.getLogger(BusinessUtil.class);
+	public static int CheckInTime; //시각
+	public static int CheckInTimeMinute; //분.
+	public static int CheckInTimeCompromise; //전일 야근은 10시까지 가능.
+	public static int WorkLateTime;
+
+	static {
+		CheckInTime = WMSConf.getInstance().getInt("CheckInTime", 9);
+		CheckInTimeMinute = WMSConf.getInstance().getInt("CheckInTimeMinute", 30);
+		CheckInTimeCompromise = WMSConf.getInstance().getInt("CheckInTimeCompromise", 10);
+		WorkLateTime = WMSConf.getInstance().getInt("WorkLateTime", 22);
+		logger.info("출근기준시각 = {}시 {}분 ", CheckInTime, CheckInTimeMinute);
+		logger.info("야근후 출근기준시각 = {}시 {}분 ", CheckInTimeCompromise, CheckInTimeMinute);
+		logger.info("야근기준시각 = {}시", WorkLateTime);
+	}
 	//지각, 정상 구분.
 	public static String getCheckInStatusString(long time){
 		
-		if(isAfterHour(CheckInTime, time)){
+		if(isAfterHour(CheckInTime, CheckInTimeMinute, time)){
 			return LiveInfo.LATE;
 		}else{
 			return LiveInfo.OK;
 		}
 	}
 	
-	public static boolean isAfterHour(int standardHour, long compareTime){
+	public static boolean isAfterHour(int standardHour, int standardMinute, long compareTime){
 		Calendar okTime = Calendar.getInstance();
 		okTime.setTimeInMillis(compareTime);
 		okTime.set(Calendar.HOUR_OF_DAY, standardHour);
-		okTime.set(Calendar.MINUTE, 1);
-		// 입력된 시간대의 1분 이후 부터 지각 처리. 
+		okTime.set(Calendar.MINUTE, standardMinute + 1);
+		// 입력된 시간대의 1분 이후 부터 지각 처리.
 		// 기존코드는 0분 부터 지각 처리 되었음 
 		okTime.set(Calendar.SECOND, 0);
 		okTime.set(Calendar.MILLISECOND, 0);
@@ -224,7 +231,7 @@ public class BusinessUtil {
 
 	//전일야근으로 인해 허용가능한 지각시간.
 	public static boolean isCompromisableLate(long thisTime){
-		return !(isAfterHour(CheckInTimeCompromise, thisTime));
+		return !(isAfterHour(CheckInTimeCompromise, CheckInTimeMinute, thisTime));
 	}
 	public static boolean isWorkLate(){
 		int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);

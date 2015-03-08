@@ -4,7 +4,7 @@
 	</properties>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.fastcatsearch</groupId>
-	<artifactId>wms</artifactId>
+	<artifactId>WMS</artifactId>
 	<version>1.0.1</version>
 	<packaging>war</packaging>
 	<dependencies>
@@ -77,36 +77,23 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.4.2</version>
-				<executions>
-					<execution>
-						<id>copy-resources</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<overwrite>false</overwrite>
-							<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}</outputDirectory>
-							<resources>
-								<resource>
-									<directory>production/jetty-8.1.14</directory>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.1.1</version>
 				<configuration>
 					<warName>${project.artifactId}</warName>
 					<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}</outputDirectory>
 					<webappDirectory>${project.build.directory}/webapp</webappDirectory>
+                    <webResources>
+                        <resource>
+                            <directory>lib</directory>
+                            <targetPath>WEB-INF/lib</targetPath>
+                            <includes>
+                                <include>**/*.jar</include>
+                            </includes>
+                        </resource>
+                    </webResources>
 				</configuration>
+
 			</plugin>
            
 		</plugins>
