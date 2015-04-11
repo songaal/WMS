@@ -10,8 +10,8 @@
 ================================================== -->
 <header class="jumbotron masthead">
 	<div class="container">
-		<h1>WebSquared</h1>
-		<p class="lead">우리는 명품 검색엔진을 만든다.</p>
+		<h1>FASTCAT</h1>
+		<p class="lead">데이터를 모으고, 검색하고, 분석한다.</p>
 		<%=WebUtil.toDateString(new Date())%> <%=WebUtil.getYoilString(Calendar.getInstance()) %>
 	</div>
 </header>

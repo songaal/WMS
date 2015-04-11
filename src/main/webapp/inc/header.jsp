@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta charset="utf-8">
-<title>업무관리시스템 :: 웹스퀘어드</title>
+<title>업무관리시스템 :: 패스트캣</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -109,15 +109,15 @@ String url = (request.getRequestURL()).toString();
 						<% if(allowedList.contains(PAGE_TASK)){ %>
 						<li class="<%=(url.indexOf(PAGE_TASK)>0) ? "active":"" %>"><a href="<%=PAGE_TASK%>">업무</a></li>
 						<% } %>
-						<% if(allowedList.contains(PAGE_TODO)){ %>
-						<li class="<%=(url.indexOf(PAGE_TODO)>0) ? "active":"" %>"><a href="<%=PAGE_TODO%>">TODO</a></li>
-						<% } %>
+						<%--<% if(allowedList.contains(PAGE_TODO)){ %>--%>
+						<%--<li class="<%=(url.indexOf(PAGE_TODO)>0) ? "active":"" %>"><a href="<%=PAGE_TODO%>">TODO</a></li>--%>
+						<%--<% } %>--%>
 						<% if(allowedList.contains(PAGE_SCHEDULE)){ %>
 						<li class="<%=(url.indexOf(PAGE_SCHEDULE)>0) ? "active":"" %>"><a href="<%=PAGE_SCHEDULE%>">일정</a></li>
 						<% } %>
-						<% if(allowedList.contains(PAGE_MESSAGE)){ %>
-						<li class="<%=(url.indexOf(PAGE_MESSAGE)>0) ? "active":"" %>"><a href="<%=PAGE_MESSAGE%>">업무연락</a></li>
-						<% } %>
+						<%--<% if(allowedList.contains(PAGE_MESSAGE)){ %>--%>
+						<%--<li class="<%=(url.indexOf(PAGE_MESSAGE)>0) ? "active":"" %>"><a href="<%=PAGE_MESSAGE%>">업무연락</a></li>--%>
+						<%--<% } %>--%>
 						<% if(allowedList.contains(PAGE_APPROVAL)){ %>
 						<li class="<%=(url.indexOf(PAGE_APPROVAL)>0) ? "active":"" %>"><a href="<%=PAGE_APPROVAL%>">결재</a></li>
 						<% } %>
@@ -127,9 +127,9 @@ String url = (request.getRequestURL()).toString();
 						<% if(allowedList.contains(PAGE_SETTINGS)){ %>
 						<li class="<%=(url.indexOf(PAGE_SETTINGS)>0) ? "active":"" %>"><a href="<%=PAGE_SETTINGS%>">관리설정</a></li>
 						<% } %>
-						<% if(allowedList.contains(PAGE_ATTACH)){ %>
-						<li class="<%=(url.indexOf(PAGE_ATTACH)>0) ? "active":"" %>"><a href="<%=PAGE_ATTACH%>">파일관리</a></li>
-						<% } %>
+						<%--<% if(allowedList.contains(PAGE_ATTACH)){ %>--%>
+						<%--<li class="<%=(url.indexOf(PAGE_ATTACH)>0) ? "active":"" %>"><a href="<%=PAGE_ATTACH%>">파일관리</a></li>--%>
+						<%--<% } %>--%>
 						
 						<% if(isLogin){ %>
 						<!-- <li><a href="javascript:toggleMemojang()"><i class="icon-pencil"></i>메모장</a></li> -->
