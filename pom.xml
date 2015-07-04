@@ -81,7 +81,7 @@
 				<version>2.1.1</version>
 				<configuration>
 					<warName>${project.artifactId}</warName>
-					<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}</outputDirectory>
+					<!--<outputDirectory>${project.build.directory}</outputDirectory>-->
 					<webappDirectory>${project.build.directory}/webapp</webappDirectory>
                     <webResources>
                         <resource>
