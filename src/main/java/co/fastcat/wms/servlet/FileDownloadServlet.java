@@ -19,7 +19,7 @@ import co.fastcat.wms.dao.FileInfoDAO;
 /**
  * Servlet implementation class FileUploadServlet
  */
-@WebServlet("/FileUploadServlet")
+@WebServlet("/FileDownloadServlet")
 public class FileDownloadServlet extends HttpServlet {
 
 	protected static Logger logger = LoggerFactory.getLogger(FileDownloadServlet.class);
