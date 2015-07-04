@@ -58,21 +58,7 @@ public class DAOHandler {
 		int maxWait = conf.getInt("pool.maxWait", 3);
 		int maxAge = conf.getInt("pool.maxAge", 300);
 		
-		JDBCProfile jdbcProfile = new JDBCProfile (database, host, port, username, password) {
-			@Override
-			protected String getDefaultPort() { return "3306"; }
-			@Override
-			//public String getDriverClassName() { return "org.mariadb.jdbc.Driver"; }
-			public String getDriverClassName() { return "com.mysql.jdbc.Driver"; }
-			@Override
-			public String getUrl() {
-				String url = "jdbc:mysql://"+host+":"+getPort()+"/"+database;
-				return url;
-			}
-			@Override
-			public String getValidationSQL() { return "SELECT NOW()"; }
-			
-		};
+		JDBCProfile jdbcProfile = new JDBCProfile.MYSQL (database, host, port, username, password);
 		jdbcProfile.addParameter("characterEncoding", "utf-8");
 		DBConnectionPool.Settings poolSettings = new DBConnectionPool.Settings(maxTotal, maxIdle, maxWait, maxAge);
 		poolManager.register(Mapper.PoolName, jdbcProfile, poolSettings);
