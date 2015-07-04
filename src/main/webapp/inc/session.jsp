@@ -1,8 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@page import="com.websqrd.company.wms.bean.*"%>
-<%@page import="com.websqrd.company.wms.webpage.*"%>
+<%@page import="co.fastcat.wms.bean.*"%>
+<%@page import="co.fastcat.wms.webpage.*"%>
 <%@page import="java.util.*"%>
 <%@page import="org.slf4j.*"%>
+<%@ page import="co.fastcat.wms.bean.UserInfo" %>
+<%@ page import="co.fastcat.wms.webpage.WebUtil" %>
 <%!
 
 	String AUTH_USER = "U"; //일반사용자.

@@ -1,9 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@page import="java.util.*"%>
-<%@page import="com.websqrd.company.wms.*"%>
-<%@page import="com.websqrd.company.wms.dao.*"%>
-<%@page import="com.websqrd.company.wms.bean.*"%>
-<%@page import="com.websqrd.company.wms.webpage.*"%>
+<%@page import="co.fastcat.wms.*"%>
+<%@page import="co.fastcat.wms.dao.*"%>
+<%@page import="co.fastcat.wms.bean.*"%>
+<%@page import="co.fastcat.wms.webpage.*"%>
+<%@ page import="co.fastcat.wms.bean.LiveInfo" %>
+<%@ page import="co.fastcat.wms.dao.LiveDAO" %>
+<%@ page import="co.fastcat.wms.webpage.BusinessUtil" %>
+<%@ page import="co.fastcat.wms.dao.UserDAO" %>
 
 <%@include file="../inc/header.jsp"%>
 
@@ -132,7 +136,7 @@
 			
 			<p>
 				<span class="label label-inverse">전체 <%=stat[0] %> </span>
-				&nbsp;<%=BusinessUtil.getLiveStatusString(LiveInfo.OK, stat[1]+"") %>
+				&nbsp;<%=BusinessUtil.getLiveStatusString(LiveInfo.OK, stat[1] + "") %>
 				&nbsp;<%=BusinessUtil.getLiveStatusString(LiveInfo.LATE, stat[2]+"") %>
 				&nbsp;<%=BusinessUtil.getLiveStatusString(LiveInfo.HALF_REST, stat[3]+"") %>
 				&nbsp;<%=BusinessUtil.getLiveStatusString(LiveInfo.REST, stat[4]+"") %>

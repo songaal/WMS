@@ -1,10 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@page import="java.util.*"%>
 <%@page import="java.text.*"%>
-<%@page import="com.websqrd.company.wms.*"%>
-<%@page import="com.websqrd.company.wms.dao.*"%>
-<%@page import="com.websqrd.company.wms.bean.*"%>
-<%@page import="com.websqrd.company.wms.webpage.*"%>
+<%@page import="co.fastcat.wms.*"%>
+<%@page import="co.fastcat.wms.dao.*"%>
+<%@page import="co.fastcat.wms.bean.*"%>
+<%@page import="co.fastcat.wms.webpage.*"%>
+<%@ page import="co.fastcat.wms.bean.ProjectInfo" %>
+<%@ page import="co.fastcat.wms.bean.DAOBean" %>
+<%@ page import="co.fastcat.wms.bean.FileInfo2" %>
+<%@ page import="co.fastcat.wms.dao.ProjectDAO" %>
+<%@ page import="co.fastcat.wms.dao.FileInfoDAO" %>
 
 <%@include file="../inc/header.jsp"%>
 <link href="/WMS/assets/css/bootstrap-fileupload.css" rel="stylesheet">

@@ -1,10 +1,16 @@
 <%@page import="java.sql.Timestamp"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@page import="java.util.*"%>
-<%@page import="com.websqrd.company.wms.*"%>
-<%@page import="com.websqrd.company.wms.dao.*"%>
-<%@page import="com.websqrd.company.wms.bean.*"%>
-<%@page import="com.websqrd.company.wms.webpage.*"%>
+<%@page import="co.fastcat.wms.*"%>
+<%@page import="co.fastcat.wms.dao.*"%>
+<%@page import="co.fastcat.wms.bean.*"%>
+<%@page import="co.fastcat.wms.webpage.*"%>
+<%@ page import="co.fastcat.wms.dao.ApprovalSettingDAO" %>
+<%@ page import="co.fastcat.wms.dao.RestDataDAO" %>
+<%@ page import="co.fastcat.wms.dao.ApprovalDAO" %>
+<%@ page import="co.fastcat.wms.bean.ApprovalSetting" %>
+<%@ page import="co.fastcat.wms.bean.RestData" %>
+<%@ page import="co.fastcat.wms.bean.ApprovalInfo" %>
 <%@include file="../inc/session.jsp"%>
 <%--
  * 휴가사용 결재요청

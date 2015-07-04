@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@include file="../inc/header.jsp" %>
 <%@page import="java.util.*" %>
-<%@page import="com.websqrd.company.wms.*" %>
+<%@page import="co.fastcat.wms.*" %>
 <script>
 $(document).ready(function(){
 	$("#addForm").validate();

@@ -1,9 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@page import="java.util.*"%>
-<%@page import="com.websqrd.company.wms.*"%>
-<%@page import="com.websqrd.company.wms.dao.*"%>
-<%@page import="com.websqrd.company.wms.bean.*"%>
-<%@page import="com.websqrd.company.wms.webpage.*"%>
+<%@page import="co.fastcat.wms.*"%>
+<%@page import="co.fastcat.wms.dao.*"%>
+<%@page import="co.fastcat.wms.bean.*"%>
+<%@page import="co.fastcat.wms.webpage.*"%>
+<%@ page import="co.fastcat.wms.dao.UserDAO" %>
 
 <%@include file="../inc/header.jsp"%>
 

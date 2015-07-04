@@ -1,9 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@page import="java.util.*"%>
-<%@page import="com.websqrd.company.wms.*"%>
-<%@page import="com.websqrd.company.wms.dao.*"%>
-<%@page import="com.websqrd.company.wms.bean.*"%>
-<%@page import="com.websqrd.company.wms.webpage.*"%>
+<%@page import="co.fastcat.wms.*"%>
+<%@page import="co.fastcat.wms.dao.*"%>
+<%@page import="co.fastcat.wms.bean.*"%>
+<%@page import="co.fastcat.wms.webpage.*"%>
+<%@ page import="co.fastcat.wms.bean.MessageInfo2" %>
+<%@ page import="co.fastcat.wms.dao.ApprovalDAO" %>
+<%@ page import="co.fastcat.wms.webpage.BusinessUtil" %>
+<%@ page import="co.fastcat.wms.dao.MessageDAO" %>
+<%@ page import="co.fastcat.wms.bean.DAOBean" %>
+<%@ page import="co.fastcat.wms.bean.ApprovalInfo2" %>
 <%@include file="../inc/session.jsp"%>
 <%
 	Object timestampObj = session.getAttribute("MSG_CHECK_TIME");
@@ -36,7 +42,7 @@
 		if(i > 0){
 			alertText += "\n";
 		}
-		alertText += (count++ +". "+message.senderName +"로부터 ["+BusinessUtil.getTitleValue(message.title)+"] 업무연락이 도착했습니다.");
+		alertText += (count++ +". "+message.senderName +"로부터 ["+ BusinessUtil.getTitleValue(message.title)+"] 업무연락이 도착했습니다.");
 	}
 	
 	for(int i=0; approvalResList != null && i< approvalResList.size(); i++){
