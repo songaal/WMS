@@ -268,56 +268,6 @@ function saveMemo(){
 	});
 }
 
-
-//copied from w3schools.com
-//Standard Scroll Clock by kurt.grigg@virgin.net
-var H='....';
-var H=H.split('');
-var M='.....';
-var M=M.split('');
-var S='......';
-var S=S.split('');
-var Ypos=0;
-var Xpos=0;
-var Ybase=8;
-var Xbase=8;
-var dots=12;
-
-function clock() {
-	var time = new Date();
-	var secs = time.getSeconds();
-	var sec = -1.57 + Math.PI * secs / 30;
-	var mins = time.getMinutes();
-	var min = -1.57 + Math.PI * mins / 30;
-	var hr = time.getHours();
-	var hrs = -1.57 + Math.PI * hr / 6 + Math.PI
-			* parseInt(time.getMinutes()) / 360;
-	for (i = 0; i < dots; ++i) {
-		document.getElementById("dig" + (i + 1)).style.top = 0 - 15 + 40
-				* Math.sin(-0.49 + dots + i / 1.9).toString() + "px";
-		document.getElementById("dig" + (i + 1)).style.left = 0 - 14 + 40
-				* Math.cos(-0.49 + dots + i / 1.9).toString() + "px";
-	}
-	/* for (i = 0; i < S.length; i++) {
-		document.getElementById("sec" + (i + 1)).style.top = Ypos + i
-				* Ybase * Math.sin(sec).toString() + "px";
-		document.getElementById("sec" + (i + 1)).style.left = Xpos + i
-				* Xbase * Math.cos(sec).toString() + "px";
-	} */
-	for (i = 0; i < M.length; i++) {
-		document.getElementById("min" + (i + 1)).style.top = Ypos + i
-				* Ybase * Math.sin(min).toString() + "px";
-		document.getElementById("min" + (i + 1)).style.left = Xpos + i
-				* Xbase * Math.cos(min).toString() + "px";
-	}
-	for (i = 0; i < H.length; i++) {
-		document.getElementById("hour" + (i + 1)).style.top = Ypos + i
-				* Ybase * Math.sin(hrs).toString() + "px";
-		document.getElementById("hour" + (i + 1)).style.left = Xpos + i
-				* Xbase * Math.cos(hrs).toString() + "px";
-	}
-	setTimeout('clock()', 50);
-}
 </script>
 <div class="container"> 
 	<div class="row">
@@ -329,41 +279,6 @@ function clock() {
 					<td>
 						<!-- 달력 -->
 						<div id="myCalendar" data-date="<%=date%>"></div>
-					</td>
-					<td>
-						<!-- 시계 -->
-						<div style="width:120px;height:100px;position:relative;left:58px;top:50px;">
-							<div id="dig1" class="dig">1</div>
-							<div id="dig2" class="dig">2</div>
-							<div id="dig3" class="dig">3</div>
-							<div id="dig4" class="dig">4</div>
-							<div id="dig5" class="dig">5</div>
-							<div id="dig6" class="dig">6</div>
-							<div id="dig7" class="dig">7</div>
-							<div id="dig8" class="dig">8</div>
-							<div id="dig9" class="dig">9</div>
-							<div id="dig10" class="dig">10</div>
-							<div id="dig11" class="dig">11</div>
-							<div id="dig12" class="dig">12</div>
-						
-							<div id="hour1" class="hour"></div>
-							<div id="hour2" class="hour"></div>
-							<div id="hour3" class="hour"></div>
-							<div id="hour4" class="hour"></div>
-						
-							<div id="min1" class="min"></div>
-							<div id="min2" class="min"></div>
-							<div id="min3" class="min"></div>
-							<div id="min4" class="min"></div>
-							<div id="min5" class="min"></div>
-						
-							<!-- <div id="sec1" class="sec"></div>
-							<div id="sec2" class="sec"></div>
-							<div id="sec3" class="sec"></div>
-							<div id="sec4" class="sec"></div>
-							<div id="sec5" class="sec"></div>
-							<div id="sec6" class="sec"></div> -->
-						</div>
 					</td>
 					</tr>
 				</table>
@@ -438,106 +353,10 @@ function clock() {
 				</div>
 			</div>
 			<div class="row">
-				<div class="span4">
-					
-					
-					<%
-					ScheduleDAO scheduleDAO = new ScheduleDAO();
-					String orderby = "order by start desc";
-					List<DAOBean> list = scheduleDAO.select(null, orderby, null, null, "limit 3", ScheduleInfo.class);
-					
-					%>
-					<h3>최근일정</h3>
-					<ul class="my-list">
-					<%
-						for(DAOBean bean : list) {
-							ScheduleInfo info = (ScheduleInfo) bean;
-							Calendar c = Calendar.getInstance();
-							c.setTime(info.startTime);
-							dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-							dayString = null;
-							if(dayOfWeek == Calendar.MONDAY){
-								dayString = "월";
-							}else if(dayOfWeek == Calendar.TUESDAY){
-								dayString = "화";
-							}else if(dayOfWeek == Calendar.WEDNESDAY){
-								dayString = "수";
-							}else if(dayOfWeek == Calendar.THURSDAY){
-								dayString = "목";
-							}else if(dayOfWeek == Calendar.FRIDAY){
-								dayString = "금";
-							}else if(dayOfWeek == Calendar.SATURDAY){
-								dayString = "토";
-							}else if(dayOfWeek == Calendar.SUNDAY){
-								dayString = "일";
-							}
-					%>
-						<li class="my-list">
-							<b><%=sdf.format(info.startTime) %> (<%=dayString %>)</b>
-							<br>
-							&nbsp;&nbsp;&nbsp;<%=info.title %>
-						</li>
-					<%
-						}
-					%>
-					</ul>
-					
-					
-					<%
-					EventDAO eventDAO = new EventDAO();
-					String orderby1 = "order by regdate desc";
-					List<DAOBean> list1 = eventDAO.select(null, orderby1, null, null, "limit 5", EventInfo.class);
-					%>
-					<h3>최근이벤트</h3>
-					<ul class="my-list">
-					<%
-						for(DAOBean bean : list1) {
-							EventInfo info = (EventInfo) bean;
-							Calendar c = Calendar.getInstance();
-							c.setTime(info.regdate);
-							dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-							dayString = null;
-							if(dayOfWeek == Calendar.MONDAY){
-								dayString = "월";
-							}else if(dayOfWeek == Calendar.TUESDAY){
-								dayString = "화";
-							}else if(dayOfWeek == Calendar.WEDNESDAY){
-								dayString = "수";
-							}else if(dayOfWeek == Calendar.THURSDAY){
-								dayString = "목";
-							}else if(dayOfWeek == Calendar.FRIDAY){
-								dayString = "금";
-							}else if(dayOfWeek == Calendar.SATURDAY){
-								dayString = "토";
-							}else if(dayOfWeek == Calendar.SUNDAY){
-								dayString = "일";
-							}
-					%>
-						<li class="my-list">
-							<b><%=sdf.format(info.regdate) %> (<%=dayString %>)</b>
-							<br>
-							&nbsp;&nbsp;&nbsp;<%=info.content %>
-						</li>
-					<%
-						}
-					%>
-							
-					</ul>
-					<form method="post" action="doMy.jsp">
-						<input type="hidden" name="action" value="newEvent" >
-						<input type="hidden" name="taskdate" value="<%=date%>"> 
-						<textarea name="content" style="width:95%; height:60px"></textarea>
-						<input type="submit" value="추가">
-					</form>
-					
-				</div>
-				
-				
-				
 				<%
 				SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy.MM.dd HH:mm");
 				%>
-				<div class="fc-day span8" id="taskdivToday">
+				<div class="fc-day span12" id="taskdivToday">
 					<%
 						TaskInfoDAO tDAO2 = new TaskInfoDAO();
 						TaskInfo tInfoToday = tDAO2.select2(userId, todayDate);

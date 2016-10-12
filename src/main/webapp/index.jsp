@@ -26,13 +26,12 @@
 		</div>
 		<!--// 로그인폼 -->
 		<%
-		}
+		} else {
+            response.sendRedirect("/WMS/my");
+        }
 		%>
 	</div>
 
 </div>
 
 <%@include file="../inc/footer.jsp"%>
-
-
-
