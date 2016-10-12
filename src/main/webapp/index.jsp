@@ -13,7 +13,9 @@
 		%>
 		<!-- 로그인폼 -->
 		<div class="span12">
-			<br><br>
+			<br><br><br>
+            <h3 style="text-align: center">패스트캣 WMS</h3>
+            <br>
 			<div class="pagination-centered">
 				<form class="form-inline" action="doLogin.jsp" method="post">
 					<input type="hidden" name="action" value="login">
