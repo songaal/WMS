@@ -136,10 +136,6 @@ $(document).ready(function(){
 	    }
 	});
 	
-	
-	///시계구동
-	clock();
-	
 	//자동저장.
 	autoSaveTask();
 	autoSaveMemo();
