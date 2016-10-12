@@ -97,12 +97,12 @@ String url = (request.getRequestURL()).toString();
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<li class="<%=(url.indexOf(PAGE_MY)>0) ? "active":"" %>"><a href="<%=PAGE_MY%>">MY</a></li>
-						<% if(allowedList.contains(PAGE_SALES)){ %>
-						<li class="<%=(url.indexOf(PAGE_SALES)>0) ? "active":"" %>"><a href="<%=PAGE_SALES%>">영업</a></li>
-						<% } %>
-						<% if(allowedList.contains(PAGE_CLIENT)){ %>
-						<li class="<%=(url.indexOf(PAGE_CLIENT)>0) ? "active":"" %>"><a href="<%=PAGE_CLIENT%>">고객정보</a></li>
-						<% } %>
+						<%--<% if(allowedList.contains(PAGE_SALES)){ %>--%>
+						<%--<li class="<%=(url.indexOf(PAGE_SALES)>0) ? "active":"" %>"><a href="<%=PAGE_SALES%>">영업</a></li>--%>
+						<%--<% } %>--%>
+						<%--<% if(allowedList.contains(PAGE_CLIENT)){ %>--%>
+						<%--<li class="<%=(url.indexOf(PAGE_CLIENT)>0) ? "active":"" %>"><a href="<%=PAGE_CLIENT%>">고객정보</a></li>--%>
+						<%--<% } %>--%>
 						<% if(allowedList.contains(PAGE_PROJECT)){ %>
 						<li class="<%=(url.indexOf(PAGE_PROJECT)>0) ? "active":"" %>"><a href="<%=PAGE_PROJECT%>">프로젝트</a></li>
 						<% } %>
@@ -112,15 +112,15 @@ String url = (request.getRequestURL()).toString();
 						<%--<% if(allowedList.contains(PAGE_TODO)){ %>--%>
 						<%--<li class="<%=(url.indexOf(PAGE_TODO)>0) ? "active":"" %>"><a href="<%=PAGE_TODO%>">TODO</a></li>--%>
 						<%--<% } %>--%>
-						<% if(allowedList.contains(PAGE_SCHEDULE)){ %>
-						<li class="<%=(url.indexOf(PAGE_SCHEDULE)>0) ? "active":"" %>"><a href="<%=PAGE_SCHEDULE%>">일정</a></li>
-						<% } %>
+						<%--<% if(allowedList.contains(PAGE_SCHEDULE)){ %>--%>
+						<%--<li class="<%=(url.indexOf(PAGE_SCHEDULE)>0) ? "active":"" %>"><a href="<%=PAGE_SCHEDULE%>">일정</a></li>--%>
+						<%--<% } %>--%>
 						<%--<% if(allowedList.contains(PAGE_MESSAGE)){ %>--%>
 						<%--<li class="<%=(url.indexOf(PAGE_MESSAGE)>0) ? "active":"" %>"><a href="<%=PAGE_MESSAGE%>">업무연락</a></li>--%>
 						<%--<% } %>--%>
-						<% if(allowedList.contains(PAGE_APPROVAL)){ %>
-						<li class="<%=(url.indexOf(PAGE_APPROVAL)>0) ? "active":"" %>"><a href="<%=PAGE_APPROVAL%>">결재</a></li>
-						<% } %>
+						<%--<% if(allowedList.contains(PAGE_APPROVAL)){ %>--%>
+						<%--<li class="<%=(url.indexOf(PAGE_APPROVAL)>0) ? "active":"" %>"><a href="<%=PAGE_APPROVAL%>">결재</a></li>--%>
+						<%--<% } %>--%>
 						<% if(allowedList.contains(PAGE_USERSETTING)){ %>
 						<li class="<%=(url.indexOf(PAGE_USERSETTING)>0) ? "active":"" %>"><a href="<%=PAGE_USERSETTING%>">사용자</a></li>
 						<% } %>
