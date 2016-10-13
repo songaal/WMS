@@ -19,6 +19,7 @@
 			redirectUrl = null;
 		}
 	}
+    
 	//패스워드가 존재할때에만 암호화 비교한다.
 	//초기에 생성시에는 없다.
 	if("login".equals(action)){
