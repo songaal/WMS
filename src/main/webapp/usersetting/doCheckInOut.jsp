@@ -27,7 +27,7 @@
 		
 		//토, 일 요일에 출근하면 주말근무이다.
 		String yoil = WebUtil.getShortYoilString(Calendar.getInstance());
-		boolean isHolidayWork = (yoil.equals("토") || yoil.equals("일")); 
+		boolean isHolidayWork = (yoil.equals("토") || ydoCheckInOutoil.equals("일"));
 		boolean isYesterdayWorkLate = false;
 
 		if(!isHolidayWork){
@@ -113,6 +113,7 @@
 		%>
 		<script>
 		bootbox.alert("<%=checkInMessage%>", function(){
+            pageFrom = "/WMS/my";
 			window.location = "<%=pageFrom%>";
 		});
 		</script>
