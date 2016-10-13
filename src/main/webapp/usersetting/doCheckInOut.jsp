@@ -112,8 +112,8 @@
 		}
 		%>
 		<script>
-		bootbox.alert("<%=checkInMessage%>", function()
-            pageFrom = "/WMS/my";{
+		bootbox.alert("<%=checkInMessage%>", function() {
+            pageFrom = "/WMS/my";
 			window.location = "<%=pageFrom%>";
 		});
 		</script>
